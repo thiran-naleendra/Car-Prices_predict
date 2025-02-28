@@ -26,13 +26,13 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: var(--light-gray);
             color: var(--text-color);
-            line-height: 1.6;
-            padding: 20px;
+            line-height: 1.2;
+            padding: 10px;
         }
 
         .container {
-            max-width: 800px;
-            background: white;
+            max-width: auto;
+            background: ghostwhite;
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -128,12 +128,12 @@
         .prediction {
             margin-top: 30px;
             padding: 20px;
-            background-color: #f0f8ff;
+            background-color: black;
             border-radius: 8px;
             border-left: 5px solid var(--primary-color);
-            font-size: 18px;
+            font-size: 24px;
             font-weight: 600;
-            color: var(--primary-color);
+            color: white;
             text-align: center;
             display: flex;
             align-items: center;
@@ -183,129 +183,98 @@
             <p>Fill in the details below to get an estimated price for your used car</p>
         </div>
 
-        <form action="/predict" method="post">
-            <div class="form-grid">
-                <div class="form-group">
-                    <label for="brand">Brand</label>
-                    <div class="input-group">
-                        <i class="fas fa-tag"></i>
-                        <input type="text" id="brand" name="brand" placeholder="e.g., Toyota, Honda" required>
-                    </div>
-                </div>
+        <form action="/predict" method="post" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%;">
 
-                <div class="form-group">
-                    <label for="model">Model</label>
-                    <div class="input-group">
-                        <i class="fas fa-car-side"></i>
-                        <input type="text" id="model" name="model" placeholder="e.g., Corolla, Civic" required>
-                    </div>
-                </div>
+    <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="brand" style="font-weight: bold;">Brand</label>
+        <input type="text" id="brand" name="brand" placeholder="e.g., Toyota, Honda" required
+               style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+    </div>
 
-                <div class="form-group">
-                    <label for="model_year">Model Year</label>
-                    <div class="input-group">
-                        <i class="fas fa-calendar-alt"></i>
-                        <input type="number" id="model_year" name="model_year" placeholder="e.g., 2018" min="1900" max="2025" required>
-                    </div>
-                </div>
+    <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="model" style="font-weight: bold;">Model</label>
+        <input type="text" id="model" name="model" placeholder="e.g., Corolla, Civic" required
+               style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+    </div>
 
-                <div class="form-group">
-                    <label for="milage">Mileage (km)</label>
-                    <div class="input-group">
-                        <i class="fas fa-tachometer-alt"></i>
-                        <input type="number" id="milage" name="milage" placeholder="e.g., 50000" min="0" required>
-                    </div>
-                </div>
+    <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="model_year" style="font-weight: bold;">Model Year</label>
+        <input type="number" id="model_year" name="model_year" placeholder="e.g., 2018" min="1900" max="2025" required
+               style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+    </div>
 
-                <div class="form-group">
-                    <label for="fuel_type">Fuel Type</label>
-                    <div class="input-group">
-                        <i class="fas fa-gas-pump"></i>
-                        <select id="fuel_type" name="fuel_type" required>
-                            <option value="" disabled selected>Select fuel type</option>
-                            <option value="Petrol">Petrol</option>
-                            <option value="Diesel">Diesel</option>
-                            <option value="Hybrid">Hybrid</option>
-                            <option value="Electric">Electric</option>
-                            <option value="CNG">CNG</option>
-                            <option value="LPG">LPG</option>
-                        </select>
-                    </div>
-                </div>
+    <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="milage" style="font-weight: bold;">Mileage (km)</label>
+        <input type="number" id="milage" name="milage" placeholder="e.g., 50000" min="0" required
+               style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+    </div>
 
-                <div class="form-group">
-                    <label for="engine">Engine Size</label>
-                    <div class="input-group">
-                        <i class="fas fa-cogs"></i>
-                        <input type="text" id="engine" name="engine" placeholder="e.g., 2.0L, 1.6L" required>
-                    </div>
-                </div>
+    <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="fuel_type" style="font-weight: bold;">Fuel Type</label>
+        <select id="fuel_type" name="fuel_type" required
+                style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+            <option value="" disabled selected>Select fuel type</option>
+            <option value="Petrol">Petrol</option>
+            <option value="Diesel">Diesel</option>
+            <option value="Hybrid">Hybrid</option>
+            <option value="Electric">Electric</option>
+        </select>
+    </div>
 
-                <div class="form-group">
-                    <label for="transmission">Transmission</label>
-                    <div class="input-group">
-                        <i class="fas fa-cog"></i>
-                        <select id="transmission" name="transmission" required>
-                            <option value="" disabled selected>Select transmission type</option>
-                            <option value="Automatic">Automatic</option>
-                            <option value="Manual">Manual</option>
-                            <option value="CVT">CVT</option>
-                            <option value="Semi-Automatic">Semi-Automatic</option>
-                        </select>
-                    </div>
-                </div>
+    <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="engine" style="font-weight: bold;">Engine Size</label>
+        <input type="text" id="engine" name="engine" placeholder="e.g., 2.0L, 1.6L" required
+               style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+    </div>
 
-                <div class="form-group">
-                    <label for="ext_col">Exterior Color</label>
-                    <div class="input-group">
-                        <i class="fas fa-palette"></i>
-                        <input type="text" id="ext_col" name="ext_col" placeholder="e.g., Black, White, Silver" required>
-                    </div>
-                </div>
+    <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="transmission" style="font-weight: bold;">Transmission</label>
+        <select id="transmission" name="transmission" required
+                style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+            <option value="" disabled selected>Select transmission type</option>
+            <option value="Automatic">Automatic</option>
+            <option value="Manual">Manual</option>
+            <option value="CVT">CVT</option>
+        </select>
+    </div>
 
-                <div class="form-group">
-                    <label for="int_col">Interior Color</label>
-                    <div class="input-group">
-                        <i class="fas fa-fill-drip"></i>
-                        <input type="text" id="int_col" name="int_col" placeholder="e.g., Black, Beige, Gray" required>
-                    </div>
-                </div>
+    <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="ext_col" style="font-weight: bold;">Exterior Color</label>
+        <input type="text" id="ext_col" name="ext_col" placeholder="e.g., Black, White, Silver" required
+               style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+    </div>
 
-                <div class="form-group">
-                    <label>Accident History</label>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="accident_yes" name="accident" value="1" required>
-                            <label for="accident_yes">Has accident history</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="accident_no" name="accident" value="0" checked>
-                            <label for="accident_no">No accidents</label>
-                        </div>
-                    </div>
-                </div>
+    <div class="form-group" style="display: flex; flex-direction: column;">
+        <label for="int_col" style="font-weight: bold;">Interior Color</label>
+        <input type="text" id="int_col" name="int_col" placeholder="e.g., Black, Beige, Gray" required
+               style="padding: 10px; border: 1px solid #ddd; border-radius: 6px;">
+    </div>
 
-                <div class="form-group">
-                    <label>Title Status</label>
-                    <div class="radio-group">
-                        <div class="radio-option">
-                            <input type="radio" id="title_clean" name="clean_title" value="1" checked>
-                            <label for="title_clean">Clean title</label>
-                        </div>
-                        <div class="radio-option">
-                            <input type="radio" id="title_not_clean" name="clean_title" value="0">
-                            <label for="title_not_clean">Salvage/Rebuilt</label>
-                        </div>
-                    </div>
-                </div>
+    <div class="form-group" style="display: flex; flex-direction: column;">
+        <label style="font-weight: bold;">Accident History</label>
+        <div style="display: flex; gap: 10px;">
+            <label><input type="radio" id="accident_yes" name="accident" value="1" required> Has accident</label>
+            <label><input type="radio" id="accident_no" name="accident" value="0" checked> No accidents</label>
+        </div>
+    </div>
 
-                <div class="form-group full-width">
-                    <button type="submit">
-                        <i class="fas fa-calculator"></i> Estimate Price
-                    </button>
-                </div>
-            </div>
-        </form>
+    <div class="form-group" style="display: flex; flex-direction: column;">
+        <label style="font-weight: bold;">Title Status</label>
+        <div style="display: flex; gap: 10px;">
+            <label><input type="radio" id="title_clean" name="clean_title" value="1" checked> Clean title</label>
+            <label><input type="radio" id="title_not_clean" name="clean_title" value="0"> Salvage/Rebuilt</label>
+        </div>
+    </div>
+
+    <div style="grid-column: span 3; text-align: center;">
+        <button type="submit"
+                style="background: #3498db; color: white; padding: 12px; border: none; border-radius: 6px;
+                       font-size: 16px; cursor: pointer; width: 100%;">
+            <i class="fas fa-calculator"></i> Estimate Price
+        </button>
+    </div>
+</form>
+
 
         {% if prediction_text %}
         <div class="prediction">

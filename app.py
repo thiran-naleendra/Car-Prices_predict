@@ -42,10 +42,15 @@ def predict():
         # Preprocess input
         input_transformed = preprocessor.transform(input_df)
 
-        # Make prediction
-        predicted_price = model.predict(input_transformed)[0][0]
+        # Make prediction (in USD)
+        predicted_price_usd = model.predict(input_transformed)[0][0]
 
-        return render_template("index.html", prediction_text=f"Estimated Car Price: LKR {predicted_price:,.2f}")
+        # Convert USD to LKR
+        exchange_rate = 280  # 1 USD = 280 LKR
+        predicted_price_lkr = predicted_price_usd * exchange_rate
+        total = predicted_price_lkr/280
+        return render_template("index.html",
+                               prediction_text=f"Estimated Car Price: LKR {total:,.2f}")
 
     except Exception as e:
         return jsonify({"error": str(e)})
